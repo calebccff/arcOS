@@ -1,0 +1,19 @@
+# Meson cross file for ARM64 targets
+
+[constants]
+cross_compile = 'aarch64-linux-gnu-'
+
+[binaries]
+c = cross_compile + 'gcc'
+cpp = cross_compile + 'c++'
+as = cross_compile + 'as'
+
+[properties]
+linker_script = 'Kernel/arm64.ld'
+cross_compile = cross_compile
+
+[host_machine]
+system = 'none'
+cpu_family = 'aarch64'
+cpu = 'arm-generic'
+endian = 'little'
