@@ -3,7 +3,7 @@ project('ArcOS', 'c', 'cpp',
 
 # Configure linker scripts from cross file
 
-linker_script_flags = []
+linker_script_flags = ['-g']
 
 linker_script = meson.get_external_property('linker_script')
 assert(linker_script != '', 'No linker script specified')
@@ -30,6 +30,8 @@ arc_includes = include_directories('include')
 arc_objs = []
 
 subdir('Kernel')
+subdir('Drivers')
+subdir('Lib')
 
 kernel_elf = custom_target('Arc.elf',
     input: arc_objs,
@@ -38,9 +40,9 @@ kernel_elf = custom_target('Arc.elf',
     build_by_default: true,
 )
 
-kernel_bin = custom_target('Arc.bin',
-    input: kernel_elf,
-    output: 'Arc.bin',
-    command: [objcopy, '-O', 'binary', '@INPUT@', '@OUTPUT@'],
-    build_by_default: true,
-)
+# kernel_bin = custom_target('Arc.bin',
+#     input: kernel_elf,
+#     output: 'Arc.bin',
+#     command: [objcopy, '-O', 'binary', '@INPUT@', '@OUTPUT@'],
+#     build_by_default: true,
+# )

@@ -1,7 +1,6 @@
 srcs = files(
-    'Core.cc'
-    'UART.cc',
-    'UART-virt.cc',
+    'Core.cc',
+    'UART-PL011.cc',
 )
 
 # Build the kernel as a shared module, then extract the objects from it
@@ -9,7 +8,7 @@ srcs = files(
 drivers = build_target('Drivers',
     srcs,
     target_type : 'shared_module',
-    include_directories : arc_includes + '.',
+    include_directories : arc_includes,
 ).extract_objects(srcs)
 
 arc_objs += [
