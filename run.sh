@@ -14,6 +14,7 @@ shift $((OPTIND-1))
 
 echo "Press Ctrl+a -> x to quit"
 qemu-system-aarch64 -M virt \
+	-machine virtualization=on \
 	-cpu cortex-a53 \
 	-nographic \
 	-smp cpus=4 \

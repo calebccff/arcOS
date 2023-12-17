@@ -5,11 +5,13 @@
 
 #define UARTDR 0x09000000
 
+static void pl011_putc(char c) {
+	writeb(c, UARTDR);
+}
+
 static void pl011_puts(const char *str) {
-	while (*str) {
-		writeb(*str, UARTDR);
-		str++;
-	}
+	while (*str)
+		pl011_putc(*str++);
 }
 
 static char pl011_getc() {
@@ -19,6 +21,7 @@ static char pl011_getc() {
 static Console pl011_console = {
 	.fifo_size = 1,
 	.puts = pl011_puts,
+	.putc = pl011_putc,
 	.getc = pl011_getc,
 };
 

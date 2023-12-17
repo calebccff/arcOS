@@ -9,8 +9,6 @@ linker_script = meson.get_external_property('linker_script')
 assert(linker_script != '', 'No linker script specified')
 linker_script_flags += '-T' + meson.project_source_root() / linker_script
 
-#add_project_link_arguments(linker_script_flags, language: ['c', 'cpp'])
-
 cross_compile = meson.get_external_property('cross_compile', '')
 
 assembler = find_program('@0@as'.format(cross_compile))
@@ -26,7 +24,7 @@ asm_gen = generator(assembler,
 )
 
 # Global variables used by all components
-arc_includes = include_directories('include')
+arc_includes = [include_directories('include')]
 arc_objs = []
 
 subdir('Kernel')
