@@ -14,7 +14,14 @@ void init(addr_t heap_top) {
 	malloc_init(ALIGN(heap_top, 0x1000), 0x200000);
 	driver_init();
 
-	test_malloc();
+	log_info("Hello, world!");
+	log_info("We are in the %s() function", __func__);
+	log_debug("Allocating 0x100 bytes");
+	void *ptr = malloc(0x100);
+	log_debug("ptr = %x", ptr);
+	log_debug("Freeing 0x100 bytes");
+	free(ptr);
+	log_info("All Done!");
 
 	puts("\nend of the line\n");
 	puts("   ╱|、\n");
